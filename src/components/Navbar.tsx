@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout, Menu, Row} from 'antd';
 import { NavLink } from 'react-router-dom';
-import {RouterNames} from "../routers/routers";
+import {RouterNames} from "../routes/routes";
 
 export const Navbar: React.FC = () => {
     return (

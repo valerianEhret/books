@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import Layout from "antd/es/layout/layout";
 import {Navbar} from "./components/Navbar";
-import {Main} from "./components/Main";
+import {AppRouter} from "./store/reducers/AppRouter";
+import { Layout } from 'antd';
 
 function App() {
   return (
     <Layout>
         <Navbar/>
-        <Main/>
+        <Layout.Content className={'h100'}>
+            <AppRouter/>
+        </Layout.Content>
     </Layout>
   );
 }
