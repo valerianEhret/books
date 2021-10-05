@@ -4,11 +4,13 @@ import { NavLink } from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {BookType} from "../store/reducers/books/booksReducer";
+import {AuthorsState} from "../store/reducers/authors/authorsReducer";
 
 
 export const Books: React.FC = () => {
 
     const books = useSelector<AppRootStateType, Array<BookType>>( state => state.books.books)
+    const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
 
     const columns = [
         {
@@ -17,14 +19,14 @@ export const Books: React.FC = () => {
             key: 'title',
         },
         {
-            title: 'AuthorLastName',
-            dataIndex: 'authorLastName',
-            key: 'authorLastName',
-        },
-        {
             title: 'AuthorFirstName',
             dataIndex: 'authorFirstName',
             key: 'authorFirstName',
+        },
+        {
+            title: 'AuthorLastName',
+            dataIndex: 'authorLastName',
+            key: 'authorLastName',
         },
         {
             title:'Year',
@@ -51,10 +53,10 @@ export const Books: React.FC = () => {
 
     const dataSource = books.map(el=>{
         return {
-            key: 'key',
+            key: el.id,
             title:el.title,
-            authorFirstName: 'authorFirstName',
-            authorLastName: 'authorLastName',
+            authorFirstName: authors[el.author_id].first_name,
+            authorLastName: authors[el.author_id].last_name,
             year:el.year,
             more: 'more',
             edit: 'edit',

@@ -3,11 +3,12 @@ import {Button, Row, Table} from "antd";
 import { NavLink } from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {AuthorType} from "../store/reducers/authors/authorsReducer";
+import {AuthorsState} from "../store/reducers/authors/authorsReducer";
+
 
 export const Authors: React.FC = () => {
 
-    const authors = useSelector<AppRootStateType, Array<AuthorType>>( state => state.authors.authors)
+    const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
 
 
     const columns = [
@@ -39,11 +40,13 @@ export const Authors: React.FC = () => {
     ]
 
 
-    const dataSource =  authors.map( (el)=>{
+    const keys = Object.keys(authors)
+
+    const dataSource =  keys.map( (id)=>{
         return {
             key: 'key',
-            firstName: el.first_name,
-            secondName: el.last_name,
+            firstName: authors[id].first_name,
+            secondName: authors[id].last_name,
             more: 'more',
             edit: 'more',
             delete: 'more'

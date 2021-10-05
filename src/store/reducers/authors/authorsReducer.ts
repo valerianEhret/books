@@ -2,34 +2,34 @@ import {v1} from "uuid";
 
 //Types
 export type AuthorsState = {
-    authors : Array<AuthorType>
+    authors : {
+        [key:string]:AuthorType
+    }
 }
 
+
 export type AuthorType = {
-    id: string
     first_name: string
     last_name: string
 }
 
 //Initial State
 const initialState: AuthorsState = {
-    authors: [
-        {
-            id: v1(),
+    authors: {
+        '1': {
             first_name: 'George',
             last_name: 'Martin'
         },
-        {
-            id: v1(),
+        '2':{
             first_name: 'John Ronald Reuel',
             last_name: 'Tolkien'
         },
-        {
-            id: v1(),
+        '3':{
             first_name: 'Joanne',
             last_name: 'Rowling'
-        },
-    ]
+        }
+    }
+
 }
 
 //Reducer
