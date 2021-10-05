@@ -1,9 +1,14 @@
 import React from "react";
 import {Button, Row, Table} from "antd";
 import { NavLink } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../store/store";
+import {BookType} from "../store/reducers/books/booksReducer";
 
 
 export const Books: React.FC = () => {
+
+    const books = useSelector<AppRootStateType, Array<BookType>>( state => state.books.books)
 
     const columns = [
         {
@@ -44,39 +49,18 @@ export const Books: React.FC = () => {
         }
     ];
 
-    const dataSource = [
-        {
+    const dataSource = books.map(el=>{
+        return {
             key: 'key',
-            title:'title',
+            title:el.title,
             authorFirstName: 'authorFirstName',
             authorLastName: 'authorLastName',
-            year:'year',
+            year:el.year,
             more: 'more',
             edit: 'edit',
             delete: 'delete'
-        },
-        {
-            key: 'key',
-            title:'title',
-            authorFirstName: 'authorFirstName',
-            authorLastName: 'authorLastName',
-            year:'year',
-            more: 'more',
-            edit: 'edit',
-            delete: 'delete'
-        },
-        {
-            key: 'key',
-            title:'title',
-            authorFirstName: 'authorFirstName',
-            authorLastName: 'authorLastName',
-            year:'year',
-            more: 'more',
-            edit: 'edit',
-            delete: 'delete'
-        },
-
-    ];
+        }
+    })
 
     return (
         <>
@@ -87,7 +71,6 @@ export const Books: React.FC = () => {
                 <Table  columns={columns}
                         dataSource={dataSource}
                 />
-
 
             </div>
         </>
