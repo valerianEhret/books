@@ -32,12 +32,32 @@ const initialState: AuthorsState = {
 
 }
 
+//AuthorEvents
+
+export enum AuthorEvents {
+    ADD_AUTHOR = 'ADD_AUTHOR'
+}
+
+
+
 //Reducer
 export const authorsReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case 'Test':
+        case  AuthorEvents.ADD_AUTHOR:
             return {...state}
         default:
             return state
     }
+}
+
+//Actions
+
+
+export const authorActions = {
+    addAuthor:(payload:{firstName:string, lastName:string}) => {
+        return {
+            type: AuthorEvents.ADD_AUTHOR,
+            payload
+        } as const
+    },
 }
