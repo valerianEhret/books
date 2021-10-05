@@ -1,9 +1,14 @@
 import React from "react";
 import {Button, Row, Table} from "antd";
 import { NavLink } from "react-router-dom";
-
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../store/store";
+import {AuthorType} from "../store/reducers/authors/authorsReducer";
 
 export const Authors: React.FC = () => {
+
+    const authors = useSelector<AppRootStateType, Array<AuthorType>>( state => state.authors.authors)
+
 
     const columns = [
         {
@@ -33,33 +38,17 @@ export const Authors: React.FC = () => {
         }
     ]
 
-    const dataSource = [
-        {
-            key: 'key',
-            firstName: 'firstName',
-            secondName: 'secondName',
-            more: 'more',
-            edit: 'more',
-            delete: 'more'
-        },
-        {
-            key: 'key',
-            firstName: 'firstName',
-            secondName: 'secondName',
-            more: 'more',
-            edit: 'more',
-            delete: 'more'
-        },
-        {
-            key: 'key',
-            firstName: 'firstName',
-            secondName: 'secondName',
-            more: 'more',
-            edit: 'more',
-            delete: 'more'
-        },
 
-    ];
+    const dataSource =  authors.map( (el)=>{
+        return {
+            key: 'key',
+            firstName: el.first_name,
+            secondName: el.last_name,
+            more: 'more',
+            edit: 'more',
+            delete: 'more'
+        }
+    })
 
     return (
         <>

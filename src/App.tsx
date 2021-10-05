@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar";
-import {AppRouter} from "./store/reducers/AppRouter";
+import {AppRouter} from "./components/AppRouter";
 import { Layout } from 'antd';
 
 function App() {

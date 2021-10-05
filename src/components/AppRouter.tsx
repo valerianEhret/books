@@ -1,6 +1,6 @@
 import React from "react";
 import {Switch, Route, Redirect} from 'react-router-dom'
-import {RouterNames, routes} from "../../routes/routes";
+import {RouterNames, routes} from "../routes/routes";
 
 export const AppRouter: React.FC = () => {
     return (
