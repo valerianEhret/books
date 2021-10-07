@@ -1,15 +1,15 @@
 import React from "react";
 import {Button, Row, Table} from "antd";
 import { NavLink } from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {AuthorsState} from "../store/reducers/authors/authorsReducer";
+import {AuthorsState, deleteAuthorTC} from "../store/reducers/authors/authorsReducer";
 
 
 export const Authors: React.FC = () => {
 
     const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
-
+    const dispatch = useDispatch()
 
     const columns = [
         {
@@ -36,7 +36,7 @@ export const Authors: React.FC = () => {
             title: 'Delete',
             key: 'delete',
             dataIndex: 'delete',
-            render:(id:string)=> <Button>delete</Button>
+            render:(id:string)=> <Button onClick={ ()=>{dispatch(deleteAuthorTC(id))} }>delete</Button>
         }
     ]
 

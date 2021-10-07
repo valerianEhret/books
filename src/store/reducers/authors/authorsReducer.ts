@@ -3,8 +3,8 @@ import {AppThunkType} from "../../store";
 
 //Types
 export type AuthorsState = {
-    authors : {
-        [key:string]:AuthorType
+    authors: {
+        [key: string]: AuthorType
     },
     isLoading: boolean,
     status: StatusType
@@ -25,11 +25,11 @@ const initialState: AuthorsState = {
             first_name: 'George',
             last_name: 'Martin'
         },
-        '2':{
+        '2': {
             first_name: 'John Ronald Reuel',
             last_name: 'Tolkien'
         },
-        '3':{
+        '3': {
             first_name: 'Joanne',
             last_name: 'Rowling'
         }
@@ -50,18 +50,17 @@ export enum AuthorEvents {
 }
 
 
-
 //Reducer
 export const authorsReducer = (state = initialState, action: AuthorsActions) => {
     switch (action.type) {
         case  AuthorEvents.ADD_AUTHOR:
             const id = v1()
             return {
-                ...state, authors:{
+                ...state, authors: {
                     ...state.authors,
-                    [id]:{
-                        first_name:action.payload.firstName,
-                        last_name:action.payload.lastName
+                    [id]: {
+                        first_name: action.payload.firstName,
+                        last_name: action.payload.lastName
                     }
                 }
             }
@@ -71,9 +70,9 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
             return stateCopy
 
         case  AuthorEvents.SET_AUTHOR_STATUS:
-            return {...state, status:action.payload}
+            return {...state, status: action.payload}
         case  AuthorEvents.SET_AUTHOR_IS_LOADING:
-            return {...state, isLoading:action.payload}
+            return {...state, isLoading: action.payload}
         default:
             return {...state}
     }
@@ -83,25 +82,25 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
 
 
 export const authorsActions = {
-    addAuthor:(payload:{firstName:string, lastName:string}) => {
+    addAuthor: (payload: { firstName: string, lastName: string }) => {
         return {
             type: AuthorEvents.ADD_AUTHOR,
             payload
         } as const
     },
-    setAuthorStatus: (payload:StatusType) =>{
+    setAuthorStatus: (payload: StatusType) => {
         return {
             type: AuthorEvents.SET_AUTHOR_STATUS,
             payload
         } as const
     },
-    setAuthorIsLoading:(payload:boolean) => {
+    setAuthorIsLoading: (payload: boolean) => {
         return {
             type: AuthorEvents.SET_AUTHOR_IS_LOADING,
             payload
         } as const
     },
-    deleteAuthor:(payload:string)=>{
+    deleteAuthor: (payload: string) => {
         return {
             type: AuthorEvents.DELETE_AUTHOR,
             payload
@@ -114,9 +113,9 @@ export type InferActionsType<T> = T extends { [keys: string]: (...args: any[]) =
 export type AuthorsActions = InferActionsType<typeof authorsActions>
 
 //Thunk
-export const addAuthorTC = (payload:{ lastName: string, firstName: string }):AppThunkType => (dispatch) => {
+export const addAuthorTC = (payload: { lastName: string, firstName: string }): AppThunkType => (dispatch) => {
+    dispatch(authorsActions.setAuthorIsLoading(true))
     try {
-        dispatch(authorsActions.setAuthorIsLoading(true))
         dispatch(authorsActions.addAuthor(payload))
         dispatch(authorsActions.setAuthorStatus('success'))
     } catch (e) {
@@ -126,4 +125,15 @@ export const addAuthorTC = (payload:{ lastName: string, firstName: string }):App
         dispatch(authorsActions.setAuthorStatus('idle'))
     }
 
+}
+
+export const deleteAuthorTC = (id:string):AppThunkType => (dispatch) => {
+    dispatch(authorsActions.setAuthorIsLoading(true))
+    try {
+        dispatch(authorsActions.deleteAuthor(id))
+    } catch (e) {
+        console.log('Error: ', e)
+    } finally {
+        dispatch(authorsActions.setAuthorIsLoading(false))
+    }
 }
