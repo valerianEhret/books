@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {AppThunkType} from "../../store";
 
 //Types
 export type AuthorsState = {
@@ -98,3 +99,19 @@ export const authorsActions = {
 export type InferActionsType<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
 export type AuthorsActions = InferActionsType<typeof authorsActions>
+
+//Thunk
+
+export const addAuthorTC = (payload:{ lastName: string, firstName: string }):AppThunkType => (dispatch) => {
+    try {
+        dispatch(authorsActions.setAuthorIsLoading(true))
+        dispatch(authorsActions.addAuthor(payload))
+        dispatch(authorsActions.setAuthorStatus('success'))
+    } catch (e) {
+        console.log('Error', e)
+    } finally {
+        dispatch(authorsActions.setAuthorIsLoading(false))
+        dispatch(authorsActions.setAuthorStatus('idle'))
+    }
+
+}

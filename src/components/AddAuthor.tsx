@@ -3,7 +3,7 @@ import {AuthorForm, FormValues} from "./AuthorForm";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {authorsActions, AuthorsState} from "../store/reducers/authors/authorsReducer";
+import {addAuthorTC, authorsActions, AuthorsState} from "../store/reducers/authors/authorsReducer";
 import {Redirect} from "react-router-dom";
 
 
@@ -15,7 +15,7 @@ export const AddAuthor:React.FC = () => {
     const onSubmitHandler = (values: FormValues) => {
         const firstName = values.firstName.trim()
         const lastName = values.lastName.trim()
-        dispatch(authorsActions.addAuthor({firstName, lastName}))
+        dispatch(addAuthorTC({firstName, lastName}))
     }
     if (status === 'success') return <Redirect to={'/authors'}/>
     return(

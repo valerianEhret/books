@@ -1,7 +1,8 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import {booksReducer} from "./reducers/books/booksReducer";
-import {authorsReducer} from "./reducers/authors/authorsReducer";
+import {AuthorsActions, authorsReducer} from "./reducers/authors/authorsReducer";
+
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,10 @@ const rootReducer = combineReducers({
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+//type of all Thunk creators
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AuthorsActions>
+
 
 export type AppRootStateType = ReturnType<typeof rootReducer>;
 // export type RootState = ReturnType<typeof store.getState>
