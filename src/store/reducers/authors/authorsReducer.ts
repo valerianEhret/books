@@ -45,6 +45,8 @@ export enum AuthorEvents {
     ADD_AUTHOR = 'ADD_AUTHOR',
     SET_AUTHOR_STATUS = 'SET_AUTHOR_STATUS',
     SET_AUTHOR_IS_LOADING = 'SET_AUTHOR_IS_LOADING',
+    DELETE_AUTHOR = 'DELETE_AUTHOR',
+
 }
 
 
@@ -63,6 +65,9 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
                     }
                 }
             }
+        case AuthorEvents.DELETE_AUTHOR:
+
+
         case  AuthorEvents.SET_AUTHOR_STATUS:
             return {...state, status:action.payload}
         case  AuthorEvents.SET_AUTHOR_IS_LOADING:
@@ -93,6 +98,12 @@ export const authorsActions = {
             type: AuthorEvents.SET_AUTHOR_IS_LOADING,
             payload
         } as const
+    },
+    deleteAuthor:(payload:string)=>{
+        return {
+            type: AuthorEvents.DELETE_AUTHOR,
+            payload
+        } as const
     }
 }
 //ActionsType
@@ -101,7 +112,6 @@ export type InferActionsType<T> = T extends { [keys: string]: (...args: any[]) =
 export type AuthorsActions = InferActionsType<typeof authorsActions>
 
 //Thunk
-
 export const addAuthorTC = (payload:{ lastName: string, firstName: string }):AppThunkType => (dispatch) => {
     try {
         dispatch(authorsActions.setAuthorIsLoading(true))

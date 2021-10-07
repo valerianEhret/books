@@ -39,6 +39,16 @@ test('Author should be added', () => {
   expect(keys.length).toBe(4)
 })
 
+test('Author should be deleted', () => {
+
+  const action = authorsActions.deleteAuthor(payload)
+  const endState = authorsReducer(startState, action)
+
+  const keys = Object.keys(endState.authors)
+
+  expect(keys.length).toBe(2)
+})
+
 
 test('Status should be changed', () => {
 
