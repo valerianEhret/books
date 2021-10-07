@@ -41,7 +41,9 @@ const initialState: AuthorsState = {
 //AuthorEvents
 
 export enum AuthorEvents {
-    ADD_AUTHOR = 'ADD_AUTHOR'
+    ADD_AUTHOR = 'ADD_AUTHOR',
+    SET_AUTHOR_STATUS = 'SET_AUTHOR_STATUS'
+
 }
 
 
@@ -58,7 +60,12 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
                         first_name:action.payload.firstName,
                         last_name:action.payload.lastName
                     }
-                }, status: 'success'
+                }
+            }
+        case  AuthorEvents.SET_AUTHOR_STATUS:
+
+            return {
+               ...state
             }
         default:
             return state
@@ -75,6 +82,12 @@ export const authorsActions = {
             payload
         } as const
     },
+    setAuthorStatus: (payload:StatusType) =>{
+        return {
+            type: AuthorEvents.SET_AUTHOR_STATUS,
+            payload
+        } as const
+    }
 }
 //ActionsType
 export type InferActionsType<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
