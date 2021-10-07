@@ -4,7 +4,9 @@ import {v1} from "uuid";
 export type AuthorsState = {
     authors : {
         [key:string]:AuthorType
-    }
+    },
+    isLoading: boolean,
+    status: StatusType
 }
 
 
@@ -12,6 +14,8 @@ export type AuthorType = {
     first_name: string
     last_name: string
 }
+
+export type StatusType = 'success' | 'idle' | 'error'
 
 //Initial State
 const initialState: AuthorsState = {
@@ -28,7 +32,9 @@ const initialState: AuthorsState = {
             first_name: 'Joanne',
             last_name: 'Rowling'
         }
-    }
+    },
+    isLoading: false,
+    status: 'idle'
 
 }
 
@@ -41,10 +47,19 @@ export enum AuthorEvents {
 
 
 //Reducer
-export const authorsReducer = (state = initialState, action: any) => {
+export const authorsReducer = (state = initialState, action: AuthorsActions) => {
     switch (action.type) {
         case  AuthorEvents.ADD_AUTHOR:
-            return {...state}
+            const id = v1()
+            return {
+                ...state, authors:{
+                    ...state.authors,
+                    [id]:{
+                        first_name:action.payload.firstName,
+                        last_name:action.payload.lastName
+                    }
+                }, status: 'success'
+            }
         default:
             return state
     }
@@ -53,7 +68,7 @@ export const authorsReducer = (state = initialState, action: any) => {
 //Actions
 
 
-export const authorActions = {
+export const authorsActions = {
     addAuthor:(payload:{firstName:string, lastName:string}) => {
         return {
             type: AuthorEvents.ADD_AUTHOR,
@@ -61,3 +76,7 @@ export const authorActions = {
         } as const
     },
 }
+//ActionsType
+export type InferActionsType<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+
+export type AuthorsActions = InferActionsType<typeof authorsActions>
