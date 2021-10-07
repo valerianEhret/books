@@ -65,7 +65,7 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
         case  AuthorEvents.SET_AUTHOR_STATUS:
 
             return {
-               ...state
+               ...state, status:action.payload
             }
         default:
             return state
