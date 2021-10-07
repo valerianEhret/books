@@ -42,8 +42,8 @@ const initialState: AuthorsState = {
 
 export enum AuthorEvents {
     ADD_AUTHOR = 'ADD_AUTHOR',
-    SET_AUTHOR_STATUS = 'SET_AUTHOR_STATUS'
-
+    SET_AUTHOR_STATUS = 'SET_AUTHOR_STATUS',
+    SET_AUTHOR_IS_LOADING = 'SET_AUTHOR_IS_LOADING',
 }
 
 
@@ -63,10 +63,9 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
                 }
             }
         case  AuthorEvents.SET_AUTHOR_STATUS:
-
-            return {
-               ...state, status:action.payload
-            }
+            return {...state, status:action.payload}
+        case  AuthorEvents.SET_AUTHOR_IS_LOADINGS:
+            return {...state}
         default:
             return state
     }
@@ -85,6 +84,12 @@ export const authorsActions = {
     setAuthorStatus: (payload:StatusType) =>{
         return {
             type: AuthorEvents.SET_AUTHOR_STATUS,
+            payload
+        } as const
+    },
+    setAuthorIsLoading:(payload:boolean) => {
+        return {
+            type: AuthorEvents.SET_AUTHOR_IS_LOADING,
             payload
         } as const
     }

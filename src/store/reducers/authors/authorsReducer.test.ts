@@ -47,3 +47,12 @@ test('Status should be changed', () => {
 
   expect(endState.status).toBe('success')
 })
+
+
+test('isLoading should be changed', () => {
+
+  const action = authorsActions.setAuthorIsLoading(true)
+  const endState = authorsReducer(startState, action)
+
+  expect(endState.isLoading).toBe(true)
+})
