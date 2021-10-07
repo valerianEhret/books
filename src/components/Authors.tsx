@@ -36,6 +36,7 @@ export const Authors: React.FC = () => {
             title: 'Delete',
             key: 'delete',
             dataIndex: 'delete',
+            render:(id:string)=> <Button>delete</Button>
         }
     ]
 
@@ -49,7 +50,7 @@ export const Authors: React.FC = () => {
             secondName: authors[id].last_name,
             more: 'more',
             edit: 'more',
-            delete: 'more'
+            delete: id
         }
     })
 

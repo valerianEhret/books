@@ -5,17 +5,19 @@ let startState: AuthorsState;
 
 beforeEach(() => {
 
+
+
   const startState = {
     authors: {
-      [v1()]: {
+      '1': {
         first_name: 'George',
         last_name: 'Martin'
       },
-      [v1()]: {
+      '2': {
         first_name: 'John Ronald Reuel',
         last_name: 'Tolkien'
       },
-      [v1()]: {
+      '3': {
         first_name: 'Joanne',
         last_name: 'Rowling'
       }
@@ -41,7 +43,7 @@ test('Author should be added', () => {
 
 test('Author should be deleted', () => {
 
-  const action = authorsActions.deleteAuthor(payload)
+  const action = authorsActions.deleteAuthor('2')
   const endState = authorsReducer(startState, action)
 
   const keys = Object.keys(endState.authors)

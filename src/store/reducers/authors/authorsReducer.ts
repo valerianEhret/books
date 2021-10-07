@@ -66,7 +66,9 @@ export const authorsReducer = (state = initialState, action: AuthorsActions) => 
                 }
             }
         case AuthorEvents.DELETE_AUTHOR:
-
+            const stateCopy = {...state, authors: {...state.authors}}
+            delete stateCopy.authors[action.payload]
+            return stateCopy
 
         case  AuthorEvents.SET_AUTHOR_STATUS:
             return {...state, status:action.payload}
