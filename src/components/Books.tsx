@@ -48,6 +48,7 @@ export const Books: React.FC = () => {
             title: 'Delete',
             key: 'delete',
             dataIndex: 'delete',
+            render: (id: string) => <Button>delete</Button>
         }
     ];
 
@@ -60,7 +61,7 @@ export const Books: React.FC = () => {
             year:el.year,
             more: 'more',
             edit: 'edit',
-            delete: 'delete'
+            delete: el.id
         }
     })
 

@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {AppThunkType} from "../../store";
+import {InferActionsType} from "../../../models/InterActionsType";
 
 //Types
 export type AuthorsState = {
@@ -108,8 +109,6 @@ export const authorsActions = {
     }
 }
 //ActionsType
-export type InferActionsType<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
-
 export type AuthorsActions = InferActionsType<typeof authorsActions>
 
 //Thunk

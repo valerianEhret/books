@@ -1,8 +1,11 @@
 import {v1} from "uuid";
+import {InferActionsType} from "../../../models/InterActionsType";
 
 
 export type BooksState = {
     books: Array<BookType>
+    status: StatusType
+    isLoading: boolean
 }
 
 export type BookType = {
@@ -13,6 +16,11 @@ export type BookType = {
     year: string
 }
 
+export type StatusType = 'success' | 'idle' | 'error'
+
+export enum BooksEvent {
+    REMOVE_BOOK = 'REMOVE_BOOK'
+}
 
 
 const initialState = {
@@ -44,16 +52,32 @@ const initialState = {
             author_id: '3',
             created_at: '2021-10-05',
             year: '1997-01-01'
-        },
-    ]
+        }
+    ],
+    status: 'idle',
+    isLoading: false
 }
 
 
-export const booksReducer = (state = initialState, action: any) => {
+export const booksReducer = (state = initialState, action: BooksActionsType) => {
     switch (action.type) {
-        case 'Test':
+        case BooksEvent.REMOVE_BOOK:
             return {...state}
         default:
             return state
+    }
+}
+
+//ActionsType
+export type BooksActionsType = InferActionsType<typeof booksActions>
+
+
+// Actions
+export const booksActions = {
+    removeBook: (id:string) => {
+        return {
+            type: BooksEvent.REMOVE_BOOK,
+            payload: id
+        } as const
     }
 }
