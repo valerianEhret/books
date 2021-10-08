@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Row, Table} from "antd";
 import { NavLink } from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {BookType} from "../store/reducers/books/booksReducer";
+import {booksActions, BooksState, BookType} from "../store/reducers/books/booksReducer";
 import {AuthorsState} from "../store/reducers/authors/authorsReducer";
 
 
@@ -11,6 +11,7 @@ export const Books: React.FC = () => {
 
     const books = useSelector<AppRootStateType, Array<BookType>>( state => state.books.books)
     const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
+    const dispatch = useDispatch()
 
     const columns = [
         {
@@ -48,7 +49,7 @@ export const Books: React.FC = () => {
             title: 'Delete',
             key: 'delete',
             dataIndex: 'delete',
-            render: (id: string) => <Button>delete</Button>
+            render: (id: string) => <Button onClick={()=>{dispatch(booksActions.removeBook(id))}}>delete</Button>
         }
     ];
 

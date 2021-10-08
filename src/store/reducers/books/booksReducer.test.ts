@@ -45,7 +45,7 @@ beforeEach(() => {
 
 test('Book should be deleted', () => {
 
-    const action = booksActions.removeBook('2')
+    const action = booksActions.removeBook('4')
     const endState = booksReducer(startState, action)
 
     expect(endState.books.length).toBe(3)
