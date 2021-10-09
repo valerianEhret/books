@@ -10,14 +10,17 @@ beforeEach(() => {
   const startState = {
     authors: {
       '1': {
+        id: '1',
         first_name: 'George',
         last_name: 'Martin'
       },
       '2': {
+        id: '2',
         first_name: 'John Ronald Reuel',
         last_name: 'Tolkien'
       },
       '3': {
+        id: '3',
         first_name: 'Joanne',
         last_name: 'Rowling'
       }

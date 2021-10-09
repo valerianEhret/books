@@ -95,7 +95,7 @@ export const booksActions = {
             payload: id
         } as const
     },
-    addBook: (payload: {title: string, author_id:string, year: string}) => {
+    addBook: (payload: {title: string, author_id: string, year: string, created_at: string}) => {
         return {
             type: BooksEvent.ADD_BOOK
         } as const

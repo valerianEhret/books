@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {Layout, Row} from "antd";
 import {AppRootStateType} from "../store/store";
-import {addBookTC, BooksState, StatusType} from "../store/reducers/books/booksReducer";
+import {addBookTC, booksActions, BooksState, StatusType} from "../store/reducers/books/booksReducer";
 import {AuthorsState} from "../store/reducers/authors/authorsReducer";
 import {BookForm, FormValues} from "../components/BookForm";
 import {formatDate} from "../utils/date";
@@ -23,7 +23,7 @@ export const AddBook: React.FC = () => {
     const allAuthors = authorsKeys.map(id => authors[id])
     const onSubmitHandler = (values: FormValues) => {
         if (values.year) {
-            dispatch (addBookTC( {
+            dispatch (booksActions.addBook( {
                     title: values.title,
                     author_id: values.authorID,
                     year: values.year,

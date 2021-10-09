@@ -59,3 +59,13 @@ test('Book should be deleted if an author is deleted', () => {
 
     expect(endState.books.length).toBe(2)
 })
+
+test('Book should be added', () => {
+
+    const newBook = {title:'Test', author_id:'1', year: '01-01-2001', created_at: '01-01-1901'}
+
+    const action = booksActions.addBook('1')
+    const endState = booksReducer(startState, action)
+
+    expect(endState.books.length).toBe(5)
+})
