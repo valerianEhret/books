@@ -1,3 +1,4 @@
+import { authorsActions } from "../authors/authorsReducer";
 import { booksActions, booksReducer, BooksState } from "./booksReducer";
 
 let startState: BooksState;
@@ -53,7 +54,7 @@ test('Book should be deleted', () => {
 
 test('Book should be deleted if an author is deleted', () => {
 
-     const action = authorsActions.deleteAuthor('1')
+    const action = authorsActions.deleteAuthor('1')
     const endState = booksReducer(startState, action)
 
     expect(endState.books.length).toBe(2)

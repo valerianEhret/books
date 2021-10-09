@@ -62,10 +62,14 @@ const initialState = {
 
 export const booksReducer = (state = initialState, action: BooksActionsType | AuthorsActionsType) => {
     switch (action.type) {
-        case BooksEvent.REMOVE_BOOK:
+        case BooksEvent.REMOVE_BOOK: {
             const copyState = {...state, books: [...state.books].map(el => ({ ...el }))}
             return {...copyState, books:copyState.books.filter(b=>b.id !== action.payload)}
-        case AuthorEvents.DELETE_AUTHOR:
+        }
+        case AuthorEvents.DELETE_AUTHOR: {
+            const copyState = {...state, books: [...state.books].map(el => ({...el}))}
+            return {...copyState, books:copyState.books.filter( el => el.author_id !== action.payload)}
+        }
 
         default:
             return state
