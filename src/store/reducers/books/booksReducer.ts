@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 import {InferActionsType} from "../../../models/InterActionsType";
 import {AuthorEvents, AuthorsActionsType} from "../authors/authorsReducer";
+import {formatDate} from "../../../utils/date";
+import {AppThunkType} from "../../store";
 
 
 export type BooksState = {
@@ -20,7 +22,8 @@ export type BookType = {
 export type StatusType = 'success' | 'idle' | 'error'
 
 export enum BooksEvent {
-    REMOVE_BOOK = 'REMOVE_BOOK'
+    REMOVE_BOOK = 'REMOVE_BOOK',
+    ADD_BOOK = 'ADD_BOOK',
 }
 
 
@@ -70,6 +73,10 @@ export const booksReducer = (state = initialState, action: BooksActionsType | Au
             const copyState = {...state, books: [...state.books].map(el => ({...el}))}
             return {...copyState, books:copyState.books.filter( el => el.author_id !== action.payload)}
         }
+        case BooksEvent.ADD_BOOK: {
+            return {...state}
+        }
+
 
         default:
             return state
@@ -87,5 +94,22 @@ export const booksActions = {
             type: BooksEvent.REMOVE_BOOK,
             payload: id
         } as const
+    },
+    addBook: (payload: {title: string, author_id:string, year: string}) => {
+        return {
+            type: BooksEvent.ADD_BOOK
+        } as const
+},
+}
+
+//Thunk
+
+export const addBookTC = ( payload :{title:string, author_id:string, year: string, created_at: string}  ): AppThunkType => (dispatch) => {
+    try {
+
+    } catch(e) {
+
+    } finally {
+
     }
 }

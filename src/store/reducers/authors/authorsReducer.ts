@@ -13,8 +13,10 @@ export type AuthorsState = {
 
 
 export type AuthorType = {
+    id:string
     first_name: string
     last_name: string
+
 }
 
 export type StatusType = 'success' | 'idle' | 'error'
@@ -23,14 +25,17 @@ export type StatusType = 'success' | 'idle' | 'error'
 const initialState: AuthorsState = {
     authors: {
         '1': {
+            id: '1',
             first_name: 'George',
             last_name: 'Martin'
         },
         '2': {
+            id: '2',
             first_name: 'John Ronald Reuel',
             last_name: 'Tolkien'
         },
         '3': {
+            id: '3',
             first_name: 'Joanne',
             last_name: 'Rowling'
         }
@@ -136,3 +141,4 @@ export const deleteAuthorTC = (id:string):AppThunkType => (dispatch) => {
         dispatch(authorsActions.setAuthorIsLoading(false))
     }
 }
+
