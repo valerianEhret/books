@@ -57,8 +57,8 @@ export const Books: React.FC = () => {
         return {
             key: el.id,
             title:el.title,
-            authorFirstName: authors[el.author_id].first_name,
-            authorLastName: authors[el.author_id].last_name,
+            authorFirstName: authors[el.author_id]? authors[el.author_id].first_name : '',
+            authorLastName:authors[el.author_id]? authors[el.author_id].last_name : '',
             year:el.year,
             more: 'more',
             edit: 'edit',

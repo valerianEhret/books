@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {InferActionsType} from "../../../models/InterActionsType";
+import {AuthorEvents, AuthorsActionsType} from "../authors/authorsReducer";
 
 
 export type BooksState = {
@@ -59,13 +60,13 @@ const initialState = {
 }
 
 
-export const booksReducer = (state = initialState, action: BooksActionsType) => {
+export const booksReducer = (state = initialState, action: BooksActionsType | AuthorsActionsType) => {
     switch (action.type) {
         case BooksEvent.REMOVE_BOOK:
-            debugger
             const copyState = {...state, books: [...state.books].map(el => ({ ...el }))}
-            let filteredState = {...copyState, books:copyState.books.filter(b=>b.id !== action.payload)}
-            return filteredState
+            return {...copyState, books:copyState.books.filter(b=>b.id !== action.payload)}
+        case AuthorEvents.DELETE_AUTHOR:
+
         default:
             return state
     }

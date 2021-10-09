@@ -52,7 +52,7 @@ export enum AuthorEvents {
 
 
 //Reducer
-export const authorsReducer = (state = initialState, action: AuthorsActions) => {
+export const authorsReducer = (state = initialState, action: AuthorsActionsType) => {
     switch (action.type) {
         case  AuthorEvents.ADD_AUTHOR:
             const id = v1()
@@ -109,7 +109,7 @@ export const authorsActions = {
     }
 }
 //ActionsType
-export type AuthorsActions = InferActionsType<typeof authorsActions>
+export type AuthorsActionsType = InferActionsType<typeof authorsActions>
 
 //Thunk
 export const addAuthorTC = (payload: { lastName: string, firstName: string }): AppThunkType => (dispatch) => {
