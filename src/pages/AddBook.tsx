@@ -9,10 +9,10 @@ import {BookForm, FormValues} from "../components/BookForm";
 import {formatDate} from "../utils/date";
 
 export const AddBook: React.FC = () => {
-    const {isLoading} = useSelector<AppRootStateType, BooksState>(state => state.books)
+    // const {isLoading} = useSelector<AppRootStateType, BooksState>(state => state.books)
     // const status = useSelector<AppRootStateType, StatusType>(state => state.books.status)
 
-    // const {isLoading, status} = useSelector<AppRootStateType, BooksState>( state => state.books)
+    const {isLoading, status} = useSelector<AppRootStateType, BooksState>( state => state.books)
     const dispatch = useDispatch()
 
 
@@ -32,7 +32,7 @@ export const AddBook: React.FC = () => {
             ))
         }
     }
-    // if (status === 'success') return <Redirect to={'/books'}/>
+    if (status === 'success') return <Redirect to={'/books'}/>
     return (
         <Layout>
             <Row justify="center" align="middle" className="h100">

@@ -1,7 +1,6 @@
 import {v1} from "uuid";
 import {InferActionsType} from "../../../models/InterActionsType";
 import {AuthorEvents, AuthorsActionsType} from "../authors/authorsReducer";
-import {formatDate} from "../../../utils/date";
 import {AppThunkType} from "../../store";
 
 
@@ -24,6 +23,8 @@ export type StatusType = 'success' | 'idle' | 'error'
 export enum BooksEvent {
     REMOVE_BOOK = 'REMOVE_BOOK',
     ADD_BOOK = 'ADD_BOOK',
+    SET_IS_LOADING = 'BOOK/SET_IS_LOADING',
+    SET_STATUS = 'BOOK/SET_STATUS',
 }
 
 
@@ -80,7 +81,12 @@ export const booksReducer = (state = initialState, action: BooksActionsType | Au
             }
             return {state, books: [...state.books, newBook]}
         }
-
+        case BooksEvent.SET_IS_LOADING: {
+            return {...state}
+        }
+        case BooksEvent.SET_STATUS: {
+            return {...state}
+        }
 
         default:
             return state
@@ -105,6 +111,19 @@ export const booksActions = {
             payload
         } as const
     },
+    setIsLoading: (payload: boolean) => {
+        return {
+            type: BooksEvent.SET_IS_LOADING,
+            payload
+        } as const
+    },
+    setStatus: (payload: StatusType) => {
+        return {
+            type: BooksEvent.SET_STATUS,
+            payload
+        } as const
+    }
+
 }
 //Thunk
 

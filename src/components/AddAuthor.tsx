@@ -3,7 +3,7 @@ import {AuthorForm, FormValues} from "./AuthorForm";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {addAuthorTC, authorsActions, AuthorsState} from "../store/reducers/authors/authorsReducer";
+import {addAuthorTC, AuthorsState} from "../store/reducers/authors/authorsReducer";
 import {Redirect} from "react-router-dom";
 
 

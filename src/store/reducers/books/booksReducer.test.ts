@@ -69,3 +69,20 @@ test('Book should be added', () => {
 
     expect(endState.books.length).toBe(5)
 })
+
+test('Status should be changed', () => {
+
+  const action = booksActions.setStatus('success')
+  const endState = booksReducer(startState, action)
+
+  expect(endState.status).toBe('success')
+})
+
+
+test('isLoading should be changed', () => {
+
+  const action = booksActions.setIsLoading(true)
+  const endState = booksReducer(startState, action)
+
+  expect(endState.isLoading).toBe(true)
+})
