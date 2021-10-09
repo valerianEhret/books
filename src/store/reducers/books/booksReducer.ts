@@ -74,7 +74,11 @@ export const booksReducer = (state = initialState, action: BooksActionsType | Au
             return {...copyState, books:copyState.books.filter( el => el.author_id !== action.payload)}
         }
         case BooksEvent.ADD_BOOK: {
-            return {...state}
+            const newBookId = v1()
+            const newBook: BookType = {
+                ...action.payload, id: newBookId
+            }
+            return {state, books: [...state.books, newBook]}
         }
 
 
@@ -89,19 +93,19 @@ export type BooksActionsType = InferActionsType<typeof booksActions>
 
 // Actions
 export const booksActions = {
-    removeBook: (id:string) => {
+    removeBook: (id: string) => {
         return {
             type: BooksEvent.REMOVE_BOOK,
             payload: id
         } as const
     },
-    addBook: (payload: {title: string, author_id: string, year: string, created_at: string}) => {
+    addBook: (payload: { title: string, author_id: string, year: string, created_at: string }) => {
         return {
-            type: BooksEvent.ADD_BOOK
+            type: BooksEvent.ADD_BOOK,
+            payload
         } as const
-},
+    },
 }
-
 //Thunk
 
 export const addBookTC = ( payload :{title:string, author_id:string, year: string, created_at: string}  ): AppThunkType => (dispatch) => {

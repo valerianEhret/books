@@ -9,7 +9,7 @@ import {AuthorsState} from "../store/reducers/authors/authorsReducer";
 
 export const Books: React.FC = () => {
 
-    const books = useSelector<AppRootStateType, Array<BookType>>( state => state.books.books)
+    const {books} = useSelector<AppRootStateType, BooksState>( state => state.books)
     const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
     const dispatch = useDispatch()
 
