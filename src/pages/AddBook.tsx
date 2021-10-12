@@ -23,7 +23,7 @@ export const AddBook: React.FC = () => {
     const allAuthors = authorsKeys.map(id => authors[id])
     const onSubmitHandler = (values: FormValues) => {
         if (values.year) {
-            dispatch (booksActions.addBook( {
+            dispatch (addBookTC( {
                     title: values.title,
                     author_id: values.authorID,
                     year: values.year,

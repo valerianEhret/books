@@ -127,12 +127,16 @@ export const booksActions = {
 }
 //Thunk
 
-export const addBookTC = ( payload :{title:string, author_id:string, year: string, created_at: string}  ): AppThunkType => (dispatch) => {
+export const addBookTC = ( payload :{title:string, author_id:string, year: string, created_at: string}  ): AppThunkType =>
+    (dispatch) => {
+    dispatch(booksActions.setIsLoading(true))
     try {
-
+        dispatch(booksActions.addBook(payload))
+        dispatch(booksActions.setStatus('success'))
     } catch(e) {
-
+        console.log('Error: ', e)
     } finally {
-
+        dispatch(booksActions.setIsLoading(false))
+        dispatch(booksActions.setStatus('idle'))
     }
 }
