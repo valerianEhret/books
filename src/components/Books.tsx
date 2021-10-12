@@ -3,13 +3,14 @@ import {Button, Row, Table} from "antd";
 import { NavLink } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {booksActions, BooksState, BookType} from "../store/reducers/books/booksReducer";
+import {booksActions, BooksState} from "../store/reducers/books/booksReducer";
 import {AuthorsState} from "../store/reducers/authors/authorsReducer";
+import {BackDrop} from "./BackDrop";
 
 
 export const Books: React.FC = () => {
 
-    const {books} = useSelector<AppRootStateType, BooksState>( state => state.books)
+    const {books, isLoading} = useSelector<AppRootStateType, BooksState>( state => state.books)
     const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
     const dispatch = useDispatch()
 
@@ -68,6 +69,7 @@ export const Books: React.FC = () => {
 
     return (
         <>
+            {isLoading && <BackDrop/>}
             <div style={{margin: 20}}>
             <Row justify={'end'}><Button type="link"><NavLink
                 to={'/book/create'}>Create+</NavLink></Button>

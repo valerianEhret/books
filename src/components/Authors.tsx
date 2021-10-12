@@ -4,11 +4,12 @@ import { NavLink } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {AuthorsState, deleteAuthorTC} from "../store/reducers/authors/authorsReducer";
+import {BackDrop} from "./BackDrop";
 
 
 export const Authors: React.FC = () => {
 
-    const {authors} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
+    const {authors, isLoading} = useSelector<AppRootStateType, AuthorsState>( state => state.authors)
     const dispatch = useDispatch()
 
     const columns = [
@@ -56,6 +57,7 @@ export const Authors: React.FC = () => {
 
     return (
         <>
+            {isLoading && <BackDrop/>}
             <div style={{margin: 20}}>
                 <Row justify={'end'}><Button type="link"><NavLink
                     to={'/author/create'}>Create+</NavLink></Button>
