@@ -82,10 +82,10 @@ export const booksReducer = (state = initialState, action: BooksActionsType | Au
             return {state, books: [...state.books, newBook]}
         }
         case BooksEvent.SET_IS_LOADING: {
-            return {...state}
+            return {...state, isLoading: action.payload}
         }
         case BooksEvent.SET_STATUS: {
-            return {...state}
+            return {...state, status: action.payload}
         }
 
         default:
