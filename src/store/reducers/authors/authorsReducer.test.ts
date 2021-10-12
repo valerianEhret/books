@@ -71,3 +71,19 @@ test('isLoading should be changed', () => {
 
   expect(endState.isLoading).toBe(true)
 })
+
+test('Author should be changed', () => {
+
+    const changedAuthor = {
+        id: '3',
+        lastName: 'Asimov',
+        firstName: 'Isaac'
+    }
+
+    const action = authorsActions.setAuthor(changedAuthor)
+    const endState = authorsReducer(startState, action)
+
+
+    expect(endState.authors[changedAuthor.id].first_name).toBe(changedAuthor.firstName)
+    expect(endState.authors[changedAuthor.id].last_name).toBe(changedAuthor.lastName)
+})

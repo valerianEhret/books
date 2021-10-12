@@ -52,7 +52,7 @@ export enum AuthorEvents {
     SET_AUTHOR_STATUS = 'SET_AUTHOR_STATUS',
     SET_AUTHOR_IS_LOADING = 'SET_AUTHOR_IS_LOADING',
     DELETE_AUTHOR = 'DELETE_AUTHOR',
-
+    SET_AUTHOR = 'SET_AUTHOR',
 }
 
 
@@ -74,6 +74,9 @@ export const authorsReducer = (state = initialState, action: AuthorsActionsType)
             const stateCopy = {...state, authors: {...state.authors}}
             delete stateCopy.authors[action.payload]
             return stateCopy
+
+        case AuthorEvents.SET_AUTHOR:
+            return {...state}
 
         case  AuthorEvents.SET_AUTHOR_STATUS:
             return {...state, status: action.payload}
@@ -111,7 +114,15 @@ export const authorsActions = {
             type: AuthorEvents.DELETE_AUTHOR,
             payload
         } as const
-    }
+    },
+    setAuthor: (payload: {
+        id: string, lastName: string, firstName: string
+    }) => {
+        return {
+            type: AuthorEvents.SET_AUTHOR,
+            payload
+        } as const
+    },
 }
 //ActionsType
 export type AuthorsActionsType = InferActionsType<typeof authorsActions>
