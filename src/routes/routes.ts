@@ -6,6 +6,8 @@ import React from "react";
 import {AddBook} from "../pages/AddBook";
 import {AboutAuthor} from "../pages/AboutAuthor";
 import {AboutBook} from "../pages/AboutBook";
+import {EditAuthor} from "../pages/EditAuthor";
+import {EditBook} from "../pages/EditBook";
 
 export enum RouterNames {
     BOOKS = '/books',
@@ -15,6 +17,8 @@ export enum RouterNames {
     BOOK_CREATE = '/book/create',
     ABOUT_AUTHOR = '/author/:id',
     ABOUT_BOOK = '/book/:id',
+    EDIT_AUTHOR = '/author/edit/:id',
+    EDIT_BOOK = '/book/edit/:id',
 }
 
 interface IRoute {
@@ -60,5 +64,14 @@ export const routes: IRoute[] = [
         exact: true,
         component: AboutBook
     },
-
+    {
+        path: RouterNames.EDIT_AUTHOR,
+        exact: true,
+        component: EditAuthor
+    },
+    {
+        path: RouterNames.EDIT_BOOK,
+        exact: true,
+        component: EditBook
+    },
 ]

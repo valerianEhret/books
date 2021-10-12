@@ -33,6 +33,7 @@ export const Authors: React.FC = () => {
             title: 'Edit',
             key: 'edit',
             dataIndex: 'edit',
+            render: (id: string) => <NavLink to={`/author/edit/${id}`}>edit</NavLink>
         },
         {
             title: 'Delete',
@@ -51,7 +52,7 @@ export const Authors: React.FC = () => {
             firstName: authors[id].first_name,
             secondName: authors[id].last_name,
             more: id,
-            edit: 'more',
+            edit: id,
             delete: id
         }
     })
