@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {AuthorsState, deleteAuthorTC} from "../store/reducers/authors/authorsReducer";
-import {BackDrop} from "./BackDrop";
+import {BackDrop} from "../components/BackDrop";
 
 
 export const Authors: React.FC = () => {
@@ -27,6 +27,7 @@ export const Authors: React.FC = () => {
             title: 'More',
             dataIndex: 'more',
             key: 'address',
+            render: (id: string) => <NavLink to={`/author/${id}`}>more</NavLink>
         },
         {
             title: 'Edit',
@@ -49,7 +50,7 @@ export const Authors: React.FC = () => {
             key: 'key',
             firstName: authors[id].first_name,
             secondName: authors[id].last_name,
-            more: 'more',
+            more: id,
             edit: 'more',
             delete: id
         }

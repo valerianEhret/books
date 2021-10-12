@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {booksActions, BooksState} from "../store/reducers/books/booksReducer";
 import {AuthorsState} from "../store/reducers/authors/authorsReducer";
-import {BackDrop} from "./BackDrop";
+import {BackDrop} from "../components/BackDrop";
 
 
 export const Books: React.FC = () => {

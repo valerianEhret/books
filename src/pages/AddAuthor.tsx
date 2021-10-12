@@ -1,5 +1,5 @@
 import {Layout, Row} from "antd";
-import {AuthorForm, FormValues} from "./AuthorForm";
+import {AuthorForm, FormValues} from "../components/AuthorForm";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
