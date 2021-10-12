@@ -39,6 +39,7 @@ export const Books: React.FC = () => {
             title:'More',
             dataIndex:   'more',
             key:'more',
+            render: (id: string) => <NavLink to={`/book/${id}`}>more</NavLink>,
 
         },
         {
@@ -61,7 +62,7 @@ export const Books: React.FC = () => {
             authorFirstName: authors[el.author_id]? authors[el.author_id].first_name : '',
             authorLastName:authors[el.author_id]? authors[el.author_id].last_name : '',
             year:el.year,
-            more: 'more',
+            more: el.id,
             edit: 'edit',
             delete: el.id
         }
