@@ -5,12 +5,20 @@ import {AuthorsActionsType, authorsReducer} from "./reducers/authors/authorsRedu
 
 
 
+
 const rootReducer = combineReducers({
     books:booksReducer,
     authors:authorsReducer
 })
 
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+let preloadedState
+const persistedStateString = localStorage.getItem('app-state')
+if (persistedStateString) {
+    preloadedState = JSON.parse(persistedStateString)
+}
+
+export const store = createStore(rootReducer, preloadedState, applyMiddleware(thunkMiddleware));
 
 type ActionsType =
     | AuthorsActionsType
@@ -22,3 +30,12 @@ export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppRootSta
 
 export type AppRootStateType = ReturnType<typeof rootReducer>;
 // export type RootState = ReturnType<typeof store.getState>
+
+
+
+
+store.subscribe( ()=>{
+    // при изменении стейта это код будет отрабатываться
+    localStorage.setItem('app-state', JSON.stringify(store.getState()))
+} )
+
