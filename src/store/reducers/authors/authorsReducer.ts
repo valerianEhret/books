@@ -76,7 +76,17 @@ export const authorsReducer = (state = initialState, action: AuthorsActionsType)
             return stateCopy
 
         case AuthorEvents.SET_AUTHOR:
-            return {...state}
+            return {
+                ...state,
+                authors: {
+                    ...state.authors,
+                    [action.payload.id]: {
+                        ...state.authors[action.payload.id],
+                        last_name: action.payload.lastName,
+                        first_name: action.payload.firstName
+                    }
+                }
+            }
 
         case  AuthorEvents.SET_AUTHOR_STATUS:
             return {...state, status: action.payload}
