@@ -122,6 +122,7 @@ export const BookForm = withFormik<Props, FormValues>({
             errors.year = 'This field is required!';
         }
         if (!values.authorID) {
+            debugger
             errors.authorID = 'This field is required!';
         }
         return errors;
