@@ -67,6 +67,19 @@ const initialState = {
 
 export const booksReducer = (state = initialState, action: BooksActionsType | AuthorsActionsType) => {
     switch (action.type) {
+
+        case BooksEvent.SET_BOOK: {
+             const copyState = {...state, books: [...state.books].map(el => ({ ...el }))}
+            copyState.books.forEach(el=> {
+                if (el.id === action.payload.id) {
+                    el.author_id = action.payload.authorID
+                    el.year = action.payload.year
+                    el.title = action.payload.title
+                }
+            })
+            return {...copyState}
+        }
+
         case BooksEvent.REMOVE_BOOK: {
             const copyState = {...state, books: [...state.books].map(el => ({ ...el }))}
             return {...copyState, books:copyState.books.filter(b=>b.id !== action.payload)}

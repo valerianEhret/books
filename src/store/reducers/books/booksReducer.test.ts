@@ -100,7 +100,7 @@ test('book should be changed', () => {
     const {title,year,author_id } = endState.books.filter(el => el.id === book.id)[0]
 
 
-    expect(endState.books.length).toBe(5)
+    expect(endState.books.length).toBe(4)
     expect(title).toBe(book.title)
     expect(year).toBe(book.year)
     expect(author_id).toBe(book.authorID)
