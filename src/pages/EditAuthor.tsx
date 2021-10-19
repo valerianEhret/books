@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
-import {AuthorsState} from "../store/reducers/authors/authorsReducer";
+import {AuthorsState, editAuthorTC} from "../store/reducers/authors/authorsReducer";
 import {Redirect, useParams} from "react-router-dom";
 import {AuthorForm, FormValues} from "../components/AuthorForm";
 import {Layout, Row} from "antd";
@@ -16,7 +16,7 @@ export const EditAuthor:React.FC = () => {
     const onSubmitHandler = (values:FormValues) => {
         const firstName = values.firstName.trim()
         const lastName = values.lastName.trim()
-        // dispatch thunk
+        dispatch(editAuthorTC({id,lastName, firstName}))
     }
     if (status === 'success') return <Redirect to={'/authors'}/>
 

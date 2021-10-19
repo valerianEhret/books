@@ -133,6 +133,7 @@ export const authorsActions = {
             payload
         } as const
     },
+
 }
 //ActionsType
 export type AuthorsActionsType = InferActionsType<typeof authorsActions>
@@ -163,3 +164,16 @@ export const deleteAuthorTC = (id:string):AppThunkType => (dispatch) => {
     }
 }
 
+export const editAuthorTC = (payload: { id: string, lastName: string, firstName: string }): AppThunkType =>
+    (dispatch) => {
+        dispatch(authorsActions.setAuthorIsLoading(true))
+        try {
+            dispatch(authorsActions.setAuthor(payload))
+            dispatch(authorsActions.setAuthorStatus('success'))
+        } catch (e) {
+            console.log('Error: ', e)
+        } finally {
+            dispatch(authorsActions.setAuthorIsLoading(false))
+            dispatch(authorsActions.setAuthorStatus('idle'))
+        }
+    }

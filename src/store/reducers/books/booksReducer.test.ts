@@ -86,3 +86,23 @@ test('isLoading should be changed', () => {
 
   expect(endState.isLoading).toBe(true)
 })
+
+test('book should be changed', () => {
+    const book = {
+        id: '2',
+        year: '1992-11-12',
+        title: 'test',
+        authorID: '1243'
+    }
+    const action = booksActions.changeBook({...book})
+    const endState = booksReducer(startState, action)
+
+    const {title,year,author_id } = endState.books.filter(el => el.id === book.id)[0]
+
+
+    expect(endState.books.length).toBe(5)
+    expect(title).toBe(book.title)
+    expect(year).toBe(book.year)
+    expect(author_id).toBe(book.authorID)
+
+})

@@ -25,6 +25,7 @@ export enum BooksEvent {
     ADD_BOOK = 'ADD_BOOK',
     SET_IS_LOADING = 'BOOK/SET_IS_LOADING',
     SET_STATUS = 'BOOK/SET_STATUS',
+    SET_BOOK = 'SET_TITLE',
 }
 
 
@@ -122,7 +123,13 @@ export const booksActions = {
             type: BooksEvent.SET_STATUS,
             payload
         } as const
-    }
+    },
+    changeBook: (payload: { id: string, title: string, year: string, authorID: string }) => {
+        return {
+            type: BooksEvent.SET_BOOK,
+            payload
+        } as const
+    },
 
 }
 //Thunk
@@ -140,3 +147,17 @@ export const addBookTC = ( payload :{title:string, author_id:string, year: strin
         dispatch(booksActions.setStatus('idle'))
     }
 }
+
+export const editBookTC = (payload: { id: string, title: string, year: string, authorID: string }): AppThunkType =>
+    async (dispatch) => {
+        dispatch(booksActions.setIsLoading(true))
+        try {
+            dispatch(booksActions.changeBook(payload))
+            dispatch(booksActions.setStatus('success'))
+        } catch (e) {
+            console.log('Error: ', e)
+        } finally {
+            dispatch(booksActions.setIsLoading(false))
+            dispatch(booksActions.setStatus('idle'))
+        }
+    }
